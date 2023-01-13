@@ -1,10 +1,14 @@
-
 from scraping import Requests, DataExtractor
 from database_interactions import DatabaseInteractions
 
+DATABASE = "world_currencies.db"
 API_REQ_LIMIT = 100
 
+
 class Collector:
+    """
+    A class to organize the collection of data and send it to the database
+    """
     def __init__(self):
         self.req = Requests()
         self.data = {}
@@ -33,11 +37,12 @@ class Collector:
 
     def collect_data(self):
         if len(self.dates) + self.req_counter >= API_REQ_LIMIT:
-            print("ERROR: Request Count Too High \n\tCurrent = " + str(self.req_counter) + "\n\tRequested = " + str(len(self.dates)))
+            print("ERROR: Request Count Too High \n\tCurrent = " + str(self.req_counter) + "\n\tRequested = " + str(
+                len(self.dates)))
             return
         for date in self.dates:
             self.store_data(self.req.historical_data(date))
-            
+
     def store_data(self, data):
         pass
 

@@ -6,6 +6,10 @@ CURRENCY_KEYS = {"USD", "EUR", "JPY", "CAD", "HKD", "KRW", "AUD", "RUB", "NZD", 
 
 
 class Requests:
+    """
+    A class to scrape data from a world currency exchange website.
+    May be useful to create a base site for webscraping for future use.
+    """
     def __init__(self):
         self.baseURL = "https://api.getgeoapi.com/v2/currency/"
         self.api_key = "?api_key=" + "71c4f1decacf4799d756de5e374e257cbeca25db"
@@ -26,6 +30,9 @@ class Requests:
 
 
 class DataExtractor:
+    """
+    Interprets the data that the Requests class pulls from the website
+    """
     def __init__(self, historical_rates):
         self.date = historical_rates["updated_date"]
         self.rates = historical_rates["rates"]
