@@ -4,6 +4,7 @@ from database_interactions import DatabaseInteractions
 
 API_REQ_LIMIT = 100
 
+
 class Collector:
     def __init__(self):
         self.req = Requests()
@@ -36,18 +37,22 @@ class Collector:
             print("ERROR: Request Count Too High \n\tCurrent = " + str(self.req_counter) + "\n\tRequested = " + str(len(self.dates)))
             return
         for date in self.dates:
-            self.store_data(self.req.historical_data(date))
-            
-    def store_data(self, data):
-        pass
+            data = self.req.historical_data(date)
+            self.store_data(DataExtractor(data))
+
+    def store_data(self, extractor):
+        date = extractor.date()
+        data = extractor.exchange_rates()
 
 
 def test_client():
+    Collector.zero_req_counter()
+    print(Collector.check_req_counter())
+
     c = Collector()
-    print(c.check_req_counter())
     c.req_counter = 40
     c.update_req_counter()
-    print(c.check_req_counter())
+    print(Collector.check_req_counter())
 
 
 if __name__ == "__main__":
