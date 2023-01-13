@@ -2,7 +2,7 @@ import requests
 
 
 API_KEY = "?api_key=" + "71c4f1decacf4799d756de5e374e257cbeca25db"
-CURRENCY_KEYS = {"USD", "EUR", "JPY", "CAD", "HKD", "KRW", "AUD", "RUB", "NZD", "GBP", "INR", "CHF"}
+CURRENCY_KEYS = ["USD", "EUR", "JPY", "CAD", "HKD", "KRW", "AUD", "RUB", "NZD", "GBP", "INR", "CHF"]
 
 
 class Requests:
@@ -34,6 +34,7 @@ class DataExtractor:
     Interprets the data that the Requests class pulls from the website
     """
     def __init__(self, historical_rates):
+        print(historical_rates)
         self.date = historical_rates["updated_date"]
         self.rates = historical_rates["rates"]
 
@@ -73,3 +74,7 @@ class Examples:
             print(extractor.date)
             print(extractor.names())
             print(extractor.exchange_rates())
+
+
+if __name__ == "__main__":
+    Examples.example_request("2010-10-24")

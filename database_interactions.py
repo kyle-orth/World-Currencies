@@ -85,9 +85,9 @@ def test():
                ("Cereal C", 150, 10)]
     # d.insert_multiple(t, cereals)
     data = d.select_multiple(t, ["calories", "protein"], "calories")
-    print("Calories and Protein, sorted by calores:\n", data)
+    print("Calories and Protein, sorted by calories:\n", data)
     data = d.select_multiple(t, ["name", "calories", "protein"], "calories", descending=True)
-    print("All data, sorted by calores, descending = True:\n", data)
+    print("All data, sorted by calories, descending = True:\n", data)
 
 
 if __name__ == "__main__":
