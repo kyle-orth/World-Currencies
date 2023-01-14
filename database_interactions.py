@@ -62,6 +62,16 @@ class DatabaseInteractions:
         except sqlite3.OperationalError as e:
             print("***ERROR*** {}\nData Not Selected: {}".format(e, columnlist))
 
+    def delete_row(self, table, criteria, orderby, offset=0):
+        command = "DELETE FROM {} WHERE {}".format(table, criteria, offset)
+        print(command)
+        try:
+            self.cursor.execute(command)
+            print("Deleted {} rows".format(self.cursor.rowcount))
+            self.connection.commit()
+        except sqlite3.OperationalError as e:
+            print("***ERROR*** {}\n Data Not Deleted: {}".format(e, criteria))
+
     @staticmethod
     def add_list_to_string(string, items):
         string += "("
