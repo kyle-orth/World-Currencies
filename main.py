@@ -35,7 +35,7 @@ if __name__ == "__main__":
         month = str(i + 1)
         if len(month) == 1:
             month = "0{}".format(month)
-        dates_list.append("2022-{}-15".format(month))
+        dates_list.append("2017-{}-08".format(month))
 
     if newDay:
         Collector.zero_req_counter()
