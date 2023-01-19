@@ -1,4 +1,5 @@
 import sqlite3
+import pandas as pd
 
 
 class DatabaseInteractions:
@@ -71,6 +72,15 @@ class DatabaseInteractions:
             self.connection.commit()
         except sqlite3.OperationalError as e:
             print("***ERROR*** {}\n Data Not Deleted: {}".format(e, criteria))
+
+    def convert_to_csv(self, table, file_location, p=False):
+        data = pd.read_sql_query("SELECT * FROM " + table, self.connection)
+        if p: print(data)
+        data.to_csv(file_location)
+
+    def end(self):
+        self.connection.commit()
+        self.connection.close()
 
     @staticmethod
     def add_list_to_string(string, items):

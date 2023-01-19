@@ -1,9 +1,9 @@
 from data_collection import Collector
 from database_interactions import DatabaseInteractions
 
-
 DATABASE = "world_currency_history.db"
 TABLE = "exchange_rates"
+CSV_FILE = "world_currency_history.csv"
 
 
 def add_dates(dates):
@@ -15,6 +15,7 @@ def add_dates(dates):
 def get_table():
     db = DatabaseInteractions(DATABASE)
     print(db.select_multiple(TABLE, ["date", "USD", "JPY", "EUR"], "date", descending=True))
+    db.end()
 
 
 def delete_rows(dates):
@@ -22,20 +23,28 @@ def delete_rows(dates):
     for date in dates:
         criteria = "date ='{}'".format(date)
         db.delete_row(TABLE, criteria, 'date', offset=1)
+    db.end()
+
+
+def convert_to_csv(p=False):
+    db = DatabaseInteractions(DATABASE)
+    db.convert_to_csv(TABLE, CSV_FILE, p=p)
+    db.end()
 
 
 if __name__ == "__main__":
     newDay = False
-    requestData = True
+    requestData = False
     deleteData = False
-    getData = True
+    getData = False
+    csv = True
 
     dates_list = []
     for i in range(12):
         month = str(i + 1)
         if len(month) == 1:
             month = "0{}".format(month)
-        dates_list.append("2017-{}-08".format(month))
+        dates_list.append("2012-{}-22".format(month))
 
     if newDay:
         Collector.zero_req_counter()
@@ -48,3 +57,6 @@ if __name__ == "__main__":
 
     if getData:
         get_table()
+
+    if csv:
+        convert_to_csv(p=True)
