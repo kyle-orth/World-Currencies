@@ -33,18 +33,18 @@ def convert_to_csv(p=False):
 
 
 if __name__ == "__main__":
-    newDay = False
-    requestData = False
+    newDay = True
+    requestData = True
     deleteData = False
     getData = False
-    csv = True
+    csv = False
 
     dates_list = []
     for i in range(12):
         month = str(i + 1)
         if len(month) == 1:
             month = "0{}".format(month)
-        dates_list.append("2012-{}-22".format(month))
+        dates_list.append("2015-{}-26".format(month))  # SETUP FOR NEXT TIME!
 
     if newDay:
         Collector.zero_req_counter()
